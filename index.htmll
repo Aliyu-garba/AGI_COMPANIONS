@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGI Technologies | Innovating the Impossible</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'agi': {
+                            '50': '#f0f4ff',
+                            '100': '#dbe4ff',
+                            '200': '#bac8ff',
+                            '300': '#91a7ff',
+                            '400': '#748ffc',
+                            '500': '#5c7cfa',
+                            '600': '#4c6ef5',
+                            '700': '#4263eb',
+                            '800': '#3b5bdb',
+                            '900': '#364fc7',
+                            '950': '#1e3a8a',
+                        },
+                        'dark': {
+                            '50': '#f8fafc',
+                            '100': '#f1f5f9',
+                            '200': '#e2e8f0',
+                            '300': '#cbd5e1',
+                            '400': '#94a3b8',
+                            '500': '#64748b',
+                            '600': '#475569',
+                            '700': '#334155',
+                            '800': '#1e293b',
+                            '900': '#0f172a',
+                            '950': '#020617',
+                        },
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                        'mono': ['Space Grotesk', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'gradient-shift': 'gradientShift 8s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(59,130,246,0.3)' },
+                            '100%': { boxShadow: '0 0 40px rgba(139,92,246,0.5)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        gradientShift: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.06);
+        }
+        * {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3b82f6, #8b5cf6); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #4c6ef5, #9b6cf7); }
+        .glass {
+            background: rgba(255, 255, 255, 0.025);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.045);
+            border-color: rgba(255, 255, 255, 0.14);
+            transform: translateY(-6px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.06);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 40%, #c084fc 70%, #60a5fa 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 6s ease infinite;
+        }
+        .gradient-text-static {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: center center;
+        }
+        .dot-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .ai-pulse {
+            animation: aiPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes aiPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5), 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 0 18px rgba(139, 92, 246, 0), 0 0 0 30px rgba(59, 130, 246, 0); }
+        }
+    </style>
+</head>
+<body class="bg-dark-950 text-dark-200 antialiased">
+
+    <div id="root"></div>
+
+    <!-- React and ReactDOM -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel standalone for JSX -->
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // ==================== CUSTOM HOOKS ====================
+        const useScrollReveal = (threshold = 0.15) => {
+            const ref = useRef(null);
+            const [isVisible, setIsVisible] = useState(false);
+            useEffect(() => {
+                const node = ref.current;
+                if (!node) return;
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting) {
+                            setIsVisible(true);
+                            observer.unobserve(node);
+                        }
+                    }, { threshold, rootMargin: '0px 0px -40px 0px' }
+                );
+                observer.observe(node);
+                return () => observer.disconnect();
+            }, [threshold]);
+            return [ref, isVisible];
+        };
+
+        const useMobileMenu = () => {
+            const [isOpen, setIsOpen] = useState(false);
+            const toggle = useCallback(() => setIsOpen(prev => !prev), []);
+            const close = useCallback(() => setIsOpen(false), []);
+            return { isOpen, toggle, close };
+        };
+
+        const useTestimonialSlider = (testimonials, interval = 5000) => {
+            const [current, setCurrent] = useState(0);
+            const [isTransitioning, setIsTransitioning] = useState(false);
+            const next = useCallback(() => {
+                if (isTransitioning) return;
+                setIsTransitioning(true);
+                setCurrent(prev => (prev + 1) % testimonials.length);
+                setTimeout(() => setIsTransitioning(false), 500);
+            }, [testimonials.length, isTransitioning]);
+            const prev = useCallback(() => {
+                if (isTransitioning) return;
+                setIsTransitioning(true);
+                setCurrent(prev => (prev - 1 + testimonials.length) % testimonials.length);
+                setTimeout(() => setIsTransitioning(false), 500);
+            }, [testimonials.length, isTransitioning]);
+            const goTo = useCallback((index) => {
+                if (isTransitioning || index === current) return;
+                setIsTransitioning(true);
+                setCurrent(index);
+                setTimeout(() => setIsTransitioning(false), 500);
+            }, [current, isTransitioning]);
+            useEffect(() => {
+                const timer = setInterval(next, interval);
+                return () => clearInterval(timer);
+            }, [next, interval]);
+            return { current, next, prev, goTo, isTransitioning };
+        };
+
+        // ==================== DATA ====================
+        const servicesData = [
+            { icon: 'fa-solid fa-rocket', title: 'Landing Page Development', description: 'High-converting, beautifully crafted landing pages optimized for performance and user engagement.', tags: ['Conversion-Focused', 'SEO Optimized', 'Fast Loading'] },
+            { icon: 'fa-solid fa-brain', title: 'AI Assistant Development', description: 'Intelligent AI chatbots and virtual assistants that automate customer interactions and business processes.', tags: ['NLP', 'Automation', '24/7 Support'] },
+            { icon: 'fa-solid fa-globe', title: 'Website Development', description: 'Custom websites built with cutting-edge technology for blazing-fast performance and stunning visuals.', tags: ['Responsive', 'Modern Stack', 'Scalable'] },
+            { icon: 'fa-solid fa-cart-shopping', title: 'E-commerce Websites', description: 'Full-featured online stores with secure payment integration and seamless shopping experiences.', tags: ['Payment Gateway', 'Inventory', 'UX Optimized'] },
+            { icon: 'fa-solid fa-graduation-cap', title: 'Education Technology', description: 'Digital learning platforms and educational portals that transform how students and educators connect.', tags: ['LMS', 'Interactive', 'Accessible'] },
+            { icon: 'fa-solid fa-chart-line', title: 'Forex Education Platforms', description: 'Specialized platforms for forex trading education with real-time data and learning resources.', tags: ['Trading Tools', 'Analytics', 'Learning Paths'] },
+            { icon: 'fa-solid fa-palette', title: 'UI/UX Design', description: 'User-centered design that delights users and drives engagement through intuitive interfaces.', tags: ['Figma', 'Prototyping', 'User Research'] },
+            { icon: 'fa-solid fa-code', title: 'Web Applications', description: 'Complex web applications with real-time features, dashboards, and advanced functionality.', tags: ['React', 'Node.js', 'API Integration'] },
+            { icon: 'fa-solid fa-building', title: 'Business Websites', description: 'Professional business websites that establish credibility and attract high-value clients.', tags: ['Corporate', 'Branding', 'Lead Generation'] },
+            { icon: 'fa-solid fa-cloud', title: 'SaaS Platforms', description: 'Scalable software-as-a-service platforms with subscription management and multi-tenant architecture.', tags: ['Multi-Tenant', 'Subscription', 'Cloud-Based'] },
+            { icon: 'fa-solid fa-robot', title: 'AI Business Automation', description: 'Automate repetitive tasks with AI-powered workflows that save time and reduce operational costs.', tags: ['Workflow', 'Efficiency', 'Cost Reduction'] },
+            { icon: 'fa-solid fa-folder-open', title: 'Portfolio Websites', description: 'Stunning portfolio websites that showcase your work and attract premium opportunities.', tags: ['Showcase', 'Personal Brand', 'Modern Design'] }
+        ];
+
+        const portfolioData = [
+            { id: 1, title: 'Sazug Past Questions Portal', category: 'Education Technology', description: 'A comprehensive digital platform providing university students with organized access to past questions, tutorials, and academic resources by course categories.', image: 'gate.jpg', tags: ['HTML', 'CSS', 'JavaScript', 'Responsive', 'Full Website'], link: 'https://aliyu-garba.github.io/sazug-past-questions-portal/', color: 'from-blue-600 to-cyan-500' },
+            { id: 2, title: 'EduExam Hub', category: 'Education Platform', description: 'An educational portal designed for secondary school students preparing for WAEC, NECO, and JAMB with study materials, exam tips, and career guidance.', image: 'edu.jpg', tags: ['HTML', 'CSS', 'JavaScript', 'Responsive', 'Full Website'], link: 'https://aliyu-garba.github.io/Eduexamhub/', color: 'from-purple-600 to-pink-500' },
+            { id: 3, title: 'Haslamu Kitchen Seasonings', category: 'E-commerce', description: 'A complete e-commerce website for kitchen seasonings with modern UI, product display, shopping system, and professional brand presentation.', image: 'kitchen.jpg', tags: ['HTML', 'CSS', 'JavaScript', 'Responsive', 'E-commerce'], link: 'https://aliyu-garba.github.io/Haslamu-kitchen-seasonings/', color: 'from-emerald-600 to-teal-500' },
+            { id: 4, title: 'Online Money Guide', category: 'Digital Platform', description: 'A comprehensive resource website offering tutorials, guides, and services for online earning methods and digital entrepreneurship.', image: 'money.jpg', tags: ['HTML', 'CSS', 'JavaScript', 'Responsive', 'Full Website'], link: '#', color: 'from-orange-500 to-yellow-500' }
+        ];
+
+        const testimonialsData = [
+            { id: 1, name: 'Ahmed Ibrahim', role: 'CEO, TechBridge Nigeria', content: 'AGI Technologies transformed our digital presence completely. The AI assistant they built for our customer support reduced response times by 70% and increased customer satisfaction dramatically. Truly world-class work.', rating: 5, avatar: '👨‍💼' },
+            { id: 2, name: 'Fatima Suleiman', role: 'Founder, EduPath Africa', content: 'Working with AGI was a game-changer for our education platform. Their understanding of UI/UX and ability to build complex systems is remarkable. Our student engagement increased by over 200% after the redesign.', rating: 5, avatar: '👩‍💼' },
+            { id: 3, name: 'David Okonkwo', role: 'Investment Director, VentureAxis', content: 'As an investor, I look for teams that combine technical excellence with business acumen. AGI Technologies impressed me with their systematic approach to building scalable SaaS solutions. Highly recommended for serious businesses.', rating: 5, avatar: '👨‍💻' },
+            { id: 4, name: 'Grace Emmanuel', role: 'Managing Director, RetailPlus', content: 'The e-commerce platform AGI built for us exceeded all expectations. The attention to detail, loading speed, and conversion optimization are outstanding. Our online sales grew by 150% within three months.', rating: 5, avatar: '👩‍🏢' },
+            { id: 5, name: 'Musa Abdullahi', role: 'CTO, FinCore Solutions', content: 'I have worked with many development teams across Africa, and AGI Technologies stands out for their professionalism and technical depth. Their AI automation solutions saved us countless hours of manual work.', rating: 5, avatar: '👨‍🔬' }
+        ];
+
+        const socialLinks = [
+            { icon: 'fa-brands fa-whatsapp', url: 'https://wa.me/2348032469896', label: 'WhatsApp', color: 'hover:text-green-400' },
+            { icon: 'fa-brands fa-facebook-f', url: 'https://www.fb.com/l/6lp1kJRRR', label: 'Facebook', color: 'hover:text-blue-400' },
+            { icon: 'fa-brands fa-instagram', url: 'https://www.instagram.com/aliyugarbainnovation', label: 'Instagram', color: 'hover:text-pink-400' },
+            { icon: 'fa-brands fa-x-twitter', url: 'https://x.com/aliyu_garb18641', label: 'X/Twitter', color: 'hover:text-gray-300' },
+            { icon: 'fa-brands fa-linkedin-in', url: 'https://www.linkedin.com/in/aliyu-garba-34b2833a0', label: 'LinkedIn', color: 'hover:text-blue-500' },
+            { icon: 'fa-brands fa-github', url: 'https://GitHub.com/Aliyu-garba', label: 'GitHub', color: 'hover:text-purple-400' },
+            { icon: 'fa-brands fa-tiktok', url: 'https://tiktok.com/@aliyugarba2452', label: 'TikTok', color: 'hover:text-pink-300' },
+            { icon: 'fa-brands fa-youtube', url: 'https://www.youtube.com/@AliyuGarbainnovations', label: 'YouTube', color: 'hover:text-red-400' }
+        ];
+
+        // ==================== COMPONENTS ====================
+        const Logo = ({ size = 'md' }) => {
+            const sizeClasses = size === 'lg' ? 'h-12 w-12' : size === 'sm' ? 'h-8 w-8' : 'h-10 w-10';
+            return (
+                <div className="flex items-center gap-3">
+                    <img src="logo.jpg" alt="AGI Technologies Logo" className={`${sizeClasses} rounded-full object-cover border-2 border-transparent bg-gradient-to-br from-blue-500 to-purple-600 p-[2px]`} />
+                    <span className="font-display font-bold text-xl text-white tracking-tight">AGI <span className="gradient-text-static">Technologies</span></span>
+                </div>
+            );
+        };
+
+        const Navbar = ({ mobileMenu, onToggleMobile, onCloseMobile }) => {
+            const [scrolled, setScrolled] = useState(false);
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 30);
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+            const navLinks = [
+                { label: 'Home', href: '#home' },
+                { label: 'About', href: '#about' },
+                { label: 'Services', href: '#services' },
+                { label: 'Portfolio', href: '#portfolio' },
+                { label: 'AI Assistant', href: '#ai-assistant' },
+                { label: 'Testimonials', href: '#testimonials' },
+                { label: 'Contact', href: '#contact' }
+            ];
+            const handleNavClick = (e, href) => {
+                e.preventDefault();
+                onCloseMobile();
+                const el = document.querySelector(href);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+            return (
+                <nav className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${scrolled ? 'bg-dark-950/85 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/40 py-3' : 'bg-transparent py-5'}`}>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+                        <a href="#home" onClick={(e) => handleNavClick(e, '#home')}><Logo size="sm" /></a>
+                        <ul className="hidden lg:flex items-center gap-8">
+                            {navLinks.map((link) => (
+                                <li key={link.href}>
+                                    <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="text-sm font-medium text-dark-300 hover:text-white transition-colors duration-300 relative py-1 group">
+                                        {link.label}
+                                        <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="hidden lg:block">
+                            <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 inline-block">Get Started</a>
+                        </div>
+                        <button onClick={onToggleMobile} className="lg:hidden text-white text-2xl p-2 z-[1001] relative">
+                            <i className={`fa-solid ${mobileMenu.isOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
+                        </button>
+                    </div>
+                    <div className={`fixed inset-0 z-[999] bg-dark-950/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 transition-all duration-500 lg:hidden ${mobileMenu.isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                        {navLinks.map((link, i) => (
+                            <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className={`text-2xl font-display font-semibold text-white hover:gradient-text-static transition-all duration-300 ${mobileMenu.isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: `${i * 60}ms` }}>{link.label}</a>
+                        ))}
+                        <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className={`mt-4 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full text-lg transition-all duration-300 ${mobileMenu.isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: `${navLinks.length * 60}ms` }}>Get Started</a>
+                    </div>
+                </nav>
+            );
+        };
+
+        const Hero = () => {
+            const [ref, isVisible] = useScrollReveal(0.1);
+            const handleScrollTo = (e, href) => {
+                e.preventDefault();
+                const el = document.querySelector(href);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+            return (
+                <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+                    <div className="absolute inset-0 grid-bg dot-pattern"></div>
+                    <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[150px] animate-float"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[150px] animate-float-slow"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-cyan-500/5 blur-[200px]"></div>
+                    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
+                        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 mb-8">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-soft"></span>
+                                <span className="text-sm font-medium text-dark-300">Kaduna, Nigeria</span>
+                                <span className="text-dark-500">|</span>
+                                <span className="text-sm font-medium gradient-text-static">AI-Powered Solutions</span>
+                            </div>
+                            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] mb-6 tracking-tight">
+                                Innovating <br className="sm:hidden" />
+                                the <span className="gradient-text">Impossible</span>
+                            </h1>
+                            <p className="max-w-3xl mx-auto text-lg sm:text-xl text-dark-400 leading-relaxed mb-10 font-light">
+                                AGI Technologies builds intelligent AI assistants, premium websites, SaaS platforms, modern digital experiences, and advanced business solutions for the future.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                <a href="#portfolio" onClick={(e) => handleScrollTo(e, '#portfolio')} className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full text-lg hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 group">
+                                    View Portfolio <i className="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                </a>
+                                <a href="#contact" onClick={(e) => handleScrollTo(e, '#contact')} className="px-8 py-4 glass border-white/10 text-white font-semibold rounded-full text-lg hover:bg-white/8 hover:border-white/20 transition-all duration-300 inline-flex items-center gap-2">
+                                    Talk With AGI <i className="fa-solid fa-comment-dots"></i>
+                                </a>
+                            </div>
+                            <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-dark-500 text-sm">
+                                <span className="flex items-center gap-2"><i className="fa-solid fa-shield-halved text-emerald-400"></i> Enterprise Security</span>
+                                <span className="flex items-center gap-2"><i className="fa-solid fa-bolt text-yellow-400"></i> Lightning Fast</span>
+                                <span className="flex items-center gap-2"><i className="fa-solid fa-headset text-blue-400"></i> 24/7 Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-dark-950 to-transparent"></div>
+                </section>
+            );
+        };
+
+        const SectionHeader = ({ title, subtitle, badge }) => (
+            <div className="text-center mb-16">
+                {badge && <span className="inline-block px-4 py-1.5 rounded-full glass border-white/10 text-sm font-medium gradient-text-static mb-4">{badge}</span>}
+                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-5 tracking-tight">{title}</h2>
+                {subtitle && <p className="max-w-2xl mx-auto text-lg text-dark-400 leading-relaxed">{subtitle}</p>}
+            </div>
+        );
+
+        const About = () => {
+            const [ref, isVisible] = useScrollReveal(0.15);
+            const stats = [
+                { value: '10+', label: 'Projects Delivered' },
+                { value: '4+', label: 'Years of Innovation' },
+                { value: '98%', label: 'Client Satisfaction' },
+                { value: '12+', label: 'Services Offered' }
+            ];
+            return (
+                <section id="about" ref={ref} className="py-24 relative">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <SectionHeader title="About AGI Technologies" subtitle="We are a forward-thinking technology company based in Kaduna, Nigeria, dedicated to building intelligent digital solutions that transform businesses." badge="Who We Are" />
+                        <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div>
+                                <h3 className="font-display text-3xl font-bold text-white mb-6">AGI – Aliyu Garba Innovations</h3>
+                                <p className="text-dark-400 leading-relaxed mb-4 text-lg">AGI Technologies is the innovation arm of Aliyu Garba Innovations, established to bridge the gap between ambitious businesses and cutting-edge technology. We specialize in building powerful AI assistants, modern websites, SaaS platforms, and comprehensive digital solutions that drive real business growth.</p>
+                                <p className="text-dark-400 leading-relaxed mb-6 text-lg">Our mission is to democratize access to advanced AI and digital technology for businesses across Africa and beyond. We believe that every business deserves powerful, intelligent systems that enhance productivity, improve customer experiences, and unlock new revenue streams.</p>
+                                <div className="flex flex-wrap gap-3">
+                                    {['Innovation-Driven', 'Client-Focused', 'Quality-Obsessed', 'Future-Ready'].map((tag) => (
+                                        <span key={tag} className="px-4 py-2 glass rounded-full text-sm font-medium text-dark-300 border-white/10">{tag}</span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-5">
+                                {stats.map((stat, i) => (
+                                    <div key={i} className="glass-card p-8 text-center">
+                                        <div className="text-4xl sm:text-5xl font-display font-bold gradient-text mb-2">{stat.value}</div>
+                                        <p className="text-dark-400 text-sm font-medium">{stat.label}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Services = () => {
+            const [ref, isVisible] = useScrollReveal(0.1);
+            const [hoveredCard, setHoveredCard] = useState(null);
+            return (
+                <section id="services" ref={ref} className="py-24 relative bg-dark-900/30">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <SectionHeader title="Our Services" subtitle="Comprehensive digital solutions powered by cutting-edge AI and modern technology stacks." badge="What We Offer" />
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                            {servicesData.map((service, i) => (
+                                <div key={i} className={`glass-card p-6 cursor-pointer group transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${i * 50}ms` }} onMouseEnter={() => setHoveredCard(i)} onMouseLeave={() => setHoveredCard(null)}>
+                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-400 ${hoveredCard === i ? 'bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-lg shadow-purple-500/30' : 'bg-white/5 text-blue-400'}`}>
+                                        <i className={`${service.icon} text-xl`}></i>
+                                    </div>
+                                    <h4 className="font-display font-semibold text-white text-lg mb-2">{service.title}</h4>
+                                    <p className="text-dark-400 text-sm leading-relaxed mb-4">{service.description}</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {service.tags.map((tag) => (
+                                            <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-dark-400 border border-white/5">{tag}</span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Portfolio = () => {
+            const [ref, isVisible] = useScrollReveal(0.1);
+            const [activeFilter, setActiveFilter] = useState('All');
+            const filters = ['All', 'Education Technology', 'E-commerce', 'Digital Platform'];
+            const filteredPortfolio = activeFilter === 'All' ? portfolioData : portfolioData.filter(p => p.category === activeFilter);
+            return (
+                <section id="portfolio" ref={ref} className="py-24 relative">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <SectionHeader title="Our Portfolio" subtitle="Explore our latest projects showcasing the quality and innovation we bring to every engagement." badge="Featured Work" />
+                        <div className="flex flex-wrap justify-center gap-3 mb-12">
+                            {filters.map((filter) => (
+                                <button key={filter} onClick={() => setActiveFilter(filter)} className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === filter ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-purple-500/25' : 'glass text-dark-400 hover:text-white border-white/10'}`}>{filter}</button>
+                            ))}
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            {filteredPortfolio.map((project, i) => (
+                                <div key={project.id} className={`glass-card overflow-hidden group transition-all duration-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${i * 80}ms` }}>
+                                    <div className="relative h-56 overflow-hidden">
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 group-hover:opacity-50 transition-opacity duration-500`}></div>
+                                        <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                            <span className="px-6 py-3 bg-white text-dark-900 font-semibold rounded-full text-sm shadow-2xl">View Project</span>
+                                        </div>
+                                    </div>
+                                    <div className="p-6">
+                                        <span className="text-xs font-semibold uppercase tracking-wider gradient-text-static">{project.category}</span>
+                                        <h3 className="font-display font-bold text-white text-xl mt-2 mb-3">{project.title}</h3>
+                                        <p className="text-dark-400 text-sm leading-relaxed mb-4">{project.description}</p>
+                                        <div className="flex flex-wrap gap-2 mb-5">
+                                            {project.tags.map((tag) => (
+                                                <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-dark-400 border border-white/5">{tag}</span>
+                                            ))}
+                                        </div>
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors">Live Demo <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const AIAssistant = () => {
+            const [ref, isVisible] = useScrollReveal(0.15);
+            return (
+                <section id="ai-assistant" ref={ref} className="py-24 relative bg-dark-900/30">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className={`glass-card p-10 sm:p-16 text-center max-w-4xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-purple-500/30">
+                                <i className="fa-solid fa-robot text-white text-3xl"></i>
+                            </div>
+                            <h3 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Chat with AGI AI</h3>
+                            <p className="text-dark-400 text-lg leading-relaxed mb-6 max-w-2xl mx-auto">Have a project idea? Discuss it with our AI assistant. Get instant guidance on how AGI Technologies can bring your vision to life. We build similar AI-powered systems for businesses worldwide.</p>
+                            <p className="text-dark-500 text-sm mb-8">Click the floating button or the link below to start a conversation with AGI AI.</p>
+                            <a href="https://synapsi-core.lovable.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-full text-lg hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 hover:scale-105">
+                                <i className="fa-solid fa-message"></i> Talk to AGI AI Now <i className="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const FloatingAIButton = () => {
+            const [isHovered, setIsHovered] = useState(false);
+            return (
+                <a href="https://synapsi-core.lovable.app/" target="_blank" rel="noopener noreferrer" className="fixed bottom-8 right-8 z-[900] group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} title="Chat with AGI AI">
+                    <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 ai-pulse flex items-center justify-center shadow-2xl shadow-purple-500/40 cursor-pointer transition-transform duration-300 hover:scale-110">
+                        <i className="fa-solid fa-robot text-white text-2xl"></i>
+                    </div>
+                    {isHovered && (
+                        <div className="absolute bottom-20 right-0 bg-dark-800 text-white text-sm px-4 py-2 rounded-xl shadow-xl whitespace-nowrap border border-white/10 animate-fade-in">
+                            Chat with AGI AI <i className="fa-solid fa-arrow-right ml-2"></i>
+                        </div>
+                    )}
+                </a>
+            );
+        };
+
+        const Testimonials = () => {
+            const [ref, isVisible] = useScrollReveal(0.1);
+            const { current, next, prev, goTo, isTransitioning } = useTestimonialSlider(testimonialsData, 5000);
+            return (
+                <section id="testimonials" ref={ref} className="py-24 relative">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <SectionHeader title="What Our Clients Say" subtitle="Trusted by businesses and investors who value quality, innovation, and results." badge="Testimonials" />
+                        <div className={`max-w-3xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div className="glass-card p-8 sm:p-12 text-center relative">
+                                <div className="text-6xl font-serif text-purple-500/30 absolute top-6 left-8 select-none">&ldquo;</div>
+                                <div className={`transition-opacity duration-500 ${isTransitioning ? 'opacity-30' : 'opacity-100'}`}>
+                                    <p className="text-dark-200 text-lg sm:text-xl leading-relaxed mb-8 pt-4">{testimonialsData[current].content}</p>
+                                    <div className="flex items-center justify-center gap-1 mb-6">
+                                        {[...Array(testimonialsData[current].rating)].map((_, i) => (
+                                            <i key={i} className="fa-solid fa-star text-yellow-400 text-sm"></i>
+                                        ))}
+                                    </div>
+                                    <div className="text-5xl mb-3">{testimonialsData[current].avatar}</div>
+                                    <h5 className="font-display font-semibold text-white text-lg">{testimonialsData[current].name}</h5>
+                                    <p className="text-dark-500 text-sm">{testimonialsData[current].role}</p>
+                                </div>
+                                <div className="flex items-center justify-center gap-3 mt-8">
+                                    <button onClick={prev} className="w-10 h-10 rounded-full glass border-white/10 flex items-center justify-center text-dark-400 hover:text-white hover:border-white/20 transition-all"><i className="fa-solid fa-chevron-left"></i></button>
+                                    {testimonialsData.map((_, i) => (
+                                        <button key={i} onClick={() => goTo(i)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === current ? 'bg-gradient-to-r from-blue-500 to-purple-500 w-8' : 'bg-white/20 hover:bg-white/40'}`}></button>
+                                    ))}
+                                    <button onClick={next} className="w-10 h-10 rounded-full glass border-white/10 flex items-center justify-center text-dark-400 hover:text-white hover:border-white/20 transition-all"><i className="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Contact = () => {
+            const [ref, isVisible] = useScrollReveal(0.1);
+            const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: '', message: '' });
+            const [submitted, setSubmitted] = useState(false);
+            const handleChange = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setSubmitted(true);
+                setTimeout(() => {
+                    setSubmitted(false);
+                    setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+                }, 4000);
+            };
+            return (
+                <section id="contact" ref={ref} className="py-24 relative bg-dark-900/30">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <SectionHeader title="Get In Touch" subtitle="Ready to start your project? Reach out and let us build something extraordinary together." badge="Contact Us" />
+                        <div className={`grid lg:grid-cols-5 gap-10 max-w-5xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div className="lg:col-span-2 space-y-6">
+                                <div className="glass-card p-6">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center flex-shrink-0"><i className="fa-solid fa-phone text-blue-400"></i></div>
+                                        <div>
+                                            <h5 className="font-semibold text-white mb-1">Phone / WhatsApp</h5>
+                                            <a href="tel:+2348032469896" className="text-dark-400 hover:text-blue-400 transition-colors">0803 246 9896</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="glass-card p-6">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-purple-600/20 flex items-center justify-center flex-shrink-0"><i className="fa-solid fa-envelope text-purple-400"></i></div>
+                                        <div>
+                                            <h5 className="font-semibold text-white mb-1">Email</h5>
+                                            <a href="mailto:agiInnovations247@gma.com" className="text-dark-400 hover:text-purple-400 transition-colors break-all">agiInnovations247@gma.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="glass-card p-6">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-emerald-600/20 flex items-center justify-center flex-shrink-0"><i className="fa-solid fa-location-dot text-emerald-400"></i></div>
+                                        <div>
+                                            <h5 className="font-semibold text-white mb-1">Location</h5>
+                                            <p className="text-dark-400">Kaduna, Nigeria</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="https://wa.me/2348032469896" target="_blank" rel="noopener noreferrer" className="glass-card p-5 flex items-center gap-4 hover:bg-white/8 transition-all group cursor-pointer block">
+                                    <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0"><i className="fa-brands fa-whatsapp text-green-400 text-2xl"></i></div>
+                                    <div>
+                                        <h5 className="font-semibold text-white group-hover:text-green-400 transition-colors">Chat on WhatsApp</h5>
+                                        <p className="text-dark-400 text-sm">Quick response guaranteed</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className="lg:col-span-3">
+                                <div className="glass-card p-8">
+                                    {submitted ? (
+                                        <div className="text-center py-12 animate-fade-in">
+                                            <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4"><i className="fa-solid fa-check text-emerald-400 text-2xl"></i></div>
+                                            <h4 className="text-white font-display font-bold text-xl mb-2">Message Sent Successfully!</h4>
+                                            <p className="text-dark-400">We will get back to you within 24 hours.</p>
+                                        </div>
+                                    ) : (
+                                        <form onSubmit={handleSubmit} className="space-y-5">
+                                            <div className="grid sm:grid-cols-2 gap-5">
+                                                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-dark-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-dark-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                            </div>
+                                            <div className="grid sm:grid-cols-2 gap-5">
+                                                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-dark-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                                <select name="service" value={formData.service} onChange={handleChange} required className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-dark-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm appearance-none">
+                                                    <option value="" className="bg-dark-800">Select Service</option>
+                                                    <option value="landing" className="bg-dark-800">Landing Page Development</option>
+                                                    <option value="ai" className="bg-dark-800">AI Assistant Development</option>
+                                                    <option value="website" className="bg-dark-800">Website Development</option>
+                                                    <option value="ecommerce" className="bg-dark-800">E-commerce Website</option>
+                                                    <option value="saas" className="bg-dark-800">SaaS Platform</option>
+                                                    <option value="other" className="bg-dark-800">Other</option>
+                                                </select>
+                                            </div>
+                                            <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your project, requirements, and goals..." required rows="5" className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-dark-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm resize-none"></textarea>
+                                            <button type="submit" className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 hover:scale-[1.02] text-lg">Send Message <i className="fa-solid fa-paper-plane ml-2"></i></button>
+                                        </form>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Footer = () => {
+            const handleFooterLink = (e, href) => {
+                e.preventDefault();
+                const el = document.querySelector(href);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+            const quickLinks = [
+                { label: 'Home', href: '#home' },
+                { label: 'About', href: '#about' },
+                { label: 'Services', href: '#services' },
+                { label: 'Portfolio', href: '#portfolio' },
+                { label: 'AI Assistant', href: '#ai-assistant' },
+                { label: 'Testimonials', href: '#testimonials' },
+                { label: 'Contact', href: '#contact' }
+            ];
+            return (
+                <footer className="pt-20 pb-10 relative border-t border-white/5">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+                            <div className="lg:col-span-1">
+                                <div className="mb-4"><Logo size="sm" /></div>
+                                <p className="text-dark-400 text-sm leading-relaxed mb-6">AGI Technologies builds intelligent AI assistants, premium websites, and advanced digital solutions for businesses ready to embrace the future.</p>
+                                <div className="flex gap-3 flex-wrap">
+                                    {socialLinks.map((social) => (
+                                        <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer" className={`w-9 h-9 rounded-full glass border-white/10 flex items-center justify-center text-dark-400 transition-all duration-300 ${social.color}`} title={social.label}>
+                                            <i className={`${social.icon} text-sm`}></i>
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <h5 className="font-display font-semibold text-white text-lg mb-5">Quick Links</h5>
+                                <ul className="space-y-3">
+                                    {quickLinks.map((link) => (
+                                        <li key={link.href}>
+                                            <a href={link.href} onClick={(e) => handleFooterLink(e, link.href)} className="text-dark-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
+                                                <i className="fa-solid fa-chevron-right text-[10px] text-dark-600 group-hover:text-blue-400 transition-colors"></i> {link.label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="font-display font-semibold text-white text-lg mb-5">Services</h5>
+                                <ul className="space-y-3">
+                                    {['AI Assistant Development', 'Website Development', 'E-commerce Solutions', 'SaaS Platforms', 'UI/UX Design', 'AI Business Automation'].map((service) => (
+                                        <li key={service} className="text-dark-400 text-sm flex items-center gap-2"><i className="fa-solid fa-circle text-[6px] text-blue-500"></i> {service}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="font-display font-semibold text-white text-lg mb-5">Contact Info</h5>
+                                <ul className="space-y-4">
+                                    <li className="flex items-start gap-3 text-sm text-dark-400"><i className="fa-solid fa-phone text-blue-400 mt-1"></i> <a href="tel:+2348032469896" className="hover:text-white transition-colors">0803 246 9896</a></li>
+                                    <li className="flex items-start gap-3 text-sm text-dark-400"><i className="fa-solid fa-envelope text-purple-400 mt-1"></i> <a href="mailto:agiInnovations247@gma.com" className="hover:text-white transition-colors break-all">agiInnovations247@gma.com</a></li>
+                                    <li className="flex items-start gap-3 text-sm text-dark-400"><i className="fa-solid fa-location-dot text-emerald-400 mt-1"></i> <span>Kaduna, Nigeria</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="pt-8 border-t border-white/5 text-center text-dark-500 text-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <p>&copy; {new Date().getFullYear()} AGI Technologies – Aliyu Garba Innovations. All rights reserved.</p>
+                            <p className="gradient-text-static font-medium">Innovating the Impossible</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // ==================== MAIN APP ====================
+        const App = () => {
+            const mobileMenu = useMobileMenu();
+            return (
+                <div className="min-h-screen bg-dark-950 text-dark-200">
+                    <Navbar mobileMenu={mobileMenu} onToggleMobile={mobileMenu.toggle} onCloseMobile={mobileMenu.close} />
+                    <Hero />
+                    <About />
+                    <Services />
+                    <Portfolio />
+                    <AIAssistant />
+                    <Testimonials />
+                    <Contact />
+                    <Footer />
+                    <FloatingAIButton />
+                </div>
+            );
+        };
+
+        // ==================== RENDER ====================
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
