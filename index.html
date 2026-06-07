@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGI Intelligence Suite | AI Ecosystem by AGI Aliyu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0a0b0f;
+            --bg-secondary: #111318;
+            --bg-card: #14171f;
+            --bg-card-hover: #1a1e28;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-card: rgba(255, 255, 255, 0.08);
+            --text-primary: #f1f3f9;
+            --text-secondary: #b0b8c9;
+            --text-muted: #6b7280;
+            --accent-blue: #4f9cf5;
+            --accent-purple: #7c5cfc;
+            --accent-green: #10b981;
+            --accent-gold: #f59e0b;
+            --accent-royal: #3b82f6;
+            --accent-blue-glow: rgba(79, 156, 245, 0.25);
+            --accent-purple-glow: rgba(124, 92, 252, 0.25);
+            --accent-green-glow: rgba(16, 185, 129, 0.25);
+            --accent-gold-glow: rgba(245, 158, 11, 0.3);
+            --accent-royal-glow: rgba(59, 130, 246, 0.25);
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --radius-xl: 28px;
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 30px rgba(0, 0, 0, 0.35);
+            --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.5), 0 20px 50px rgba(0, 0, 0, 0.45);
+            --transition-smooth: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+            --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+
+        /* Subtle animated background grain/dots */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
+        }
+
+        /* Ambient glow orbs */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.12;
+            animation: orbFloat 18s ease-in-out infinite;
+        }
+        .ambient-orb.orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-blue);
+            top: -15%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        .ambient-orb.orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-purple);
+            bottom: -12%;
+            right: -8%;
+            animation-delay: -7s;
+            animation-duration: 20s;
+        }
+        .ambient-orb.orb-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--accent-gold);
+            top: 50%;
+            left: 60%;
+            animation-delay: -4s;
+            animation-duration: 16s;
+            opacity: 0.07;
+        }
+
+        @keyframes orbFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(40px, -30px) scale(1.08);
+            }
+            50% {
+                transform: translate(-20px, 25px) scale(0.94);
+            }
+            75% {
+                transform: translate(-35px, -15px) scale(1.05);
+            }
+        }
+
+        /* Main container */
+        .page-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1400px;
+            padding: 28px 32px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ── Header ─────────────────────── */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 10px 0 6px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .logo-wrapper {
+            position: relative;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #1e2230 0%, #1a1d28 100%);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.03), 0 8px 24px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-smooth);
+        }
+        .logo-wrapper:hover {
+            border-color: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.04), 0 12px 32px rgba(0, 0, 0, 0.55);
+        }
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .logo-placeholder {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #4f9cf5, #7c5cfc);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .brand-tag {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            white-space: nowrap;
+        }
+
+        /* ── Hero / Heading ─────────────── */
+        .hero-section {
+            text-align: center;
+            margin: 36px 0 12px;
+            width: 100%;
+        }
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            display: inline-block;
+            padding: 5px 14px;
+            background: rgba(79, 156, 245, 0.08);
+            border-radius: 20px;
+            border: 1px solid rgba(79, 156, 245, 0.15);
+        }
+        .hero-title {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin: 10px 0 8px;
+            background: linear-gradient(165deg, #ffffff 0%, #d0d8e8 45%, #b8c5dd 70%, #e8ecf4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 620px;
+            margin: 0 auto;
+            letter-spacing: -0.01em;
+            line-height: 1.55;
+        }
+        .hero-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 3px;
+            margin: 20px auto 0;
+            opacity: 0.7;
+        }
+
+        /* ── Cards Grid ─────────────────── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin: 36px 0 28px;
+            padding: 0;
+        }
+
+        /* Individual Card */
+        .ai-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 26px 22px 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            isolation: isolate;
+            min-height: 280px;
+        }
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            opacity: 0;
+            transition: opacity 0.45s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .ai-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: var(--shadow-card-hover);
+            transform: translateY(-6px);
+        }
+        .ai-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Card accent top line */
+        .ai-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            border-radius: 0 0 8px 8px;
+            transition: var(--transition-bounce);
+            opacity: 0.55;
+        }
+        .ai-card:hover::after {
+            opacity: 1;
+            left: 10px;
+            right: 10px;
+        }
+
+        /* Card-specific accent colors */
+        .card--assistant::after {
+            background: var(--accent-blue);
+            box-shadow: 0 0 20px var(--accent-blue-glow);
+        }
+        .card--assistant::before {
+            background: radial-gradient(ellipse at 50% 0%, rgba(79, 156, 245, 0.06) 0%, transparent 70%);
+        }
+        .card--assistant .card-icon-circle {
+            background: linear-gradient(135deg, rgba(79, 156, 245, 0.18), rgba(79, 156, 245, 0.06));
+            color: #7db9f9;
+            box-shadow: 0 0 30px rgba(79, 156, 245, 0.2);
+        }
+
+        .card--mentor::after {
+            background: var(--accent-purple);
+            box-shadow: 0 0 20px var(--accent-purple-glow);
+        }
+        .card--mentor::before {
+            background: radial-gradient(ellipse at 50% 0%, rgba(124, 92, 252, 0.06) 0%, transparent 70%);
+        }
+        .card--mentor .card-icon-circle {
+            background: linear-gradient(135deg, rgba(124, 92, 252, 0.18), rgba(124, 92, 252, 0.06));
+            color: #a48ffb;
+            box-shadow: 0 0 30px rgba(124, 92, 252, 0.2);
+        }
+
+        .card--signal::after {
+            background: var(--accent-green);
+            box-shadow: 0 0 20px var(--accent-green-glow);
+        }
+        .card--signal::before {
+            background: radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+        }
+        .card--signal .card-icon-circle {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0.06));
+            color: #34d399;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+        }
+
+        .card--gold::after {
+            background: var(--accent-gold);
+            box-shadow: 0 0 20px var(--accent-gold-glow);
+        }
+        .card--gold::before {
+            background: radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.07) 0%, transparent 70%);
+        }
+        .card--gold .card-icon-circle {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.07));
+            color: #fbbf24;
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.25);
+        }
+
+        .card--university::after {
+            background: var(--accent-royal);
+            box-shadow: 0 0 20px var(--accent-royal-glow);
+        }
+        .card--university::before {
+            background: radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+        }
+        .card--university .card-icon-circle {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(59, 130, 246, 0.06));
+            color: #6ba6f9;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Card icon */
+        .card-icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            transition: var(--transition-bounce);
+            flex-shrink: 0;
+        }
+        .ai-card:hover .card-icon-circle {
+            transform: scale(1.08);
+            border-radius: 16px;
+        }
+
+        /* Card content */
+        .card-title {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.2;
+        }
+        .card-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0;
+            flex-grow: 1;
+            letter-spacing: -0.005em;
+        }
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: auto;
+        }
+        .card-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 5px 10px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            color: var(--text-muted);
+            white-space: nowrap;
+            transition: var(--transition-smooth);
+        }
+        .ai-card:hover .card-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.12);
+            color: #c0c7d4;
+        }
+        .card-link-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition-smooth);
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+        .ai-card:hover .card-link-text {
+            opacity: 1;
+            gap: 8px;
+        }
+        .card-link-text i {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        .ai-card:hover .card-link-text i {
+            transform: translateX(3px);
+        }
+
+        /* ── Footer ─────────────────────── */
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 22px 20px 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 8px;
+        }
+        .footer-brand {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+        .footer-brand strong {
+            font-weight: 700;
+            color: #d0d8e8;
+            letter-spacing: -0.01em;
+        }
+        .footer-dot {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            margin: 0 8px;
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+        .footer-year {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ── Responsive ────────────────── */
+        @media (max-width: 1300px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+            }
+        }
+        @media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .page-container {
+                padding: 20px 18px 0;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            .ai-card {
+                padding: 22px 18px 20px;
+                min-height: 250px;
+            }
+        }
+        @media (max-width: 560px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .page-container {
+                padding: 14px 12px 0;
+            }
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            .hero-subtitle {
+                font-size: 0.88rem;
+            }
+            .header {
+                gap: 10px;
+            }
+            .logo-wrapper {
+                width: 44px;
+                height: 44px;
+            }
+            .ai-card {
+                min-height: auto;
+                padding: 20px 16px 18px;
+                gap: 10px;
+            }
+            .card-icon-circle {
+                width: 42px;
+                height: 42px;
+                font-size: 1.2rem;
+                border-radius: 12px;
+            }
+            .ambient-orb {
+                display: none;
+            }
+        }
+
+        /* ── Smooth entrance animation ──── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .ai-card {
+            animation: fadeInUp 0.7s ease forwards;
+            opacity: 0;
+        }
+        .ai-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+        .ai-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+        .ai-card:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+        .ai-card:nth-child(4) {
+            animation-delay: 0.35s;
+        }
+        .ai-card:nth-child(5) {
+            animation-delay: 0.45s;
+        }
+
+        /* Selection style */
+        ::selection {
+            background: rgba(79, 156, 245, 0.3);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient glow orbs -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <!-- Page Container -->
+    <div class="page-container">
+
+        <!-- Header with Logo -->
+        <header class="header">
+            <div class="logo-wrapper">
+                <!-- Replace 'logo.jpg' with your actual logo file path -->
+                <img src="logo.jpg" alt="AGI Aliyu Logo" onerror="this.style.display='none';this.parentElement.querySelector('.logo-placeholder').style.display='flex';">
+                <div class="logo-placeholder" style="display:none;">AGI</div>
+            </div>
+           
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <span class="hero-eyebrow">✦ AI Ecosystems</span>
+            <h1 class="hero-title">AGI Intelligence Suite</h1>
+            <p class="hero-subtitle">
+                Specialized artificial intelligence solutions — meticulously engineered to
+                empower your business, development, trading, and academic journey.
+            </p>
+            <div class="hero-divider"></div>
+        </section>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+
+            <!-- Card 1: AGI Assistant -->
+            <a href="https://agi-connect-ng.lovable.app" target="_blank" rel="noopener noreferrer" class="ai-card card--assistant" title="Launch AGI Assistant">
+                <div class="card-icon-circle">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="card-title">AGI Assistant</h3>
+                <p class="card-desc">
+                    Your brand's personal AI that handles client conversations, manages bookings,
+                    and securely collects payments — all in one intelligent assistant.
+                </p>
+                <div class="card-tags">
+                    <span class="card-tag">Client Chat</span>
+                    <span class="card-tag">Bookings</span>
+                    <span class="card-tag">Payments</span>
+                </div>
+                <span class="card-link-text">Launch App <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <!-- Card 2: AGI Build X Mentor -->
+            <a href="https://agi-build-x-mentor.lovable.app" target="_blank" rel="noopener noreferrer" class="ai-card card--mentor" title="Launch AGI Build X Mentor">
+                <div class="card-icon-circle">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <h3 class="card-title">AGI Build X Mentor</h3>
+                <p class="card-desc">
+                    Your dedicated full-stack development mentor — guiding you through every layer
+                    of modern web &amp; software engineering with expertise.
+                </p>
+                <div class="card-tags">
+                    <span class="card-tag">Full-Stack</span>
+                    <span class="card-tag">Mentorship</span>
+                    <span class="card-tag">Code Review</span>
+                </div>
+                <span class="card-link-text">Launch App <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <!-- Card 3: AGI Signal X -->
+            <a href="https://signal-agi-x.lovable.app" target="_blank" rel="noopener noreferrer" class="ai-card card--signal" title="Launch AGI Signal X">
+                <div class="card-icon-circle">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3 class="card-title">AGI Signal X</h3>
+                <p class="card-desc">
+                    A professional forex trading institute specializing in four currency pairs —
+                    generating precise signals, analytics, and comprehensive trading education.
+                </p>
+                <div class="card-tags">
+                    <span class="card-tag">4 Pairs</span>
+                    <span class="card-tag">Signals</span>
+                    <span class="card-tag">Institute</span>
+                </div>
+                <span class="card-link-text">Launch App <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <!-- Card 4: Gold Zenith Intelligence -->
+            <a href="https://gold-zenith-intelligence.lovable.app" target="_blank" rel="noopener noreferrer" class="ai-card card--gold" title="Launch Gold Zenith Intelligence">
+                <div class="card-icon-circle">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <h3 class="card-title">Gold Zenith Intelligence</h3>
+                <p class="card-desc">
+                    Exclusively specialized in XAU/USD gold trading — delivering deep market
+                    intelligence and precision analysis for the gold market.
+                </p>
+                <div class="card-tags">
+                    <span class="card-tag">XAUUSD</span>
+                    <span class="card-tag">Gold Expert</span>
+                    <span class="card-tag">Analytics</span>
+                </div>
+                <span class="card-link-text">Launch App <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <!-- Card 5: SAZ Assist AI -->
+            <a href="https://saz-assist-ai.lovable.app" target="_blank" rel="noopener noreferrer" class="ai-card card--university" title="Launch SAZ Assist AI">
+                <div class="card-icon-circle">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="card-title">SAZ Assist AI</h3>
+                <p class="card-desc">
+                    Built for SAZUG students — an academic companion that supports research,
+                    learning, and success throughout the university journey.
+                </p>
+                <div class="card-tags">
+                    <span class="card-tag">Academic</span>
+                    <span class="card-tag">Research</span>
+                    <span class="card-tag">SAZUG</span>
+                </div>
+                <span class="card-link-text">Launch App <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-brand">
+                Powered by <strong>AGI Innovations</strong>
+                <span class="footer-dot"></span>
+                <span class="footer-year">&copy; 2026</span>
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
